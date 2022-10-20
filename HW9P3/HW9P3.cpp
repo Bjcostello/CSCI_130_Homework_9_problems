@@ -15,7 +15,7 @@ int main() {
 
   zeroMatrix_6col(studentAnswer, 6, 6);
 
-  //inputs
+  // inputs
   for (int i = 0; i < 6; i++)
     studentAnswer[i][0] = i + 1;
 
@@ -25,13 +25,27 @@ int main() {
     }
   }
 
-  //calculate grades
-  
+  // calculate grades
+  for (int i = 0; i < 6; i++) {
+    int a = 0; // sum of all correct answers on test
+    if (studentAnswer[i][1] == 1)
+      a = a + 5;
+    if (studentAnswer[i][2] == 1)
+      a = a + 5;
+    if (studentAnswer[i][3] == 0)
+      a = a + 5;
+    if (studentAnswer[i][4] == 0)
+      a = a + 5;
+    if (studentAnswer[i][5] == 1)
+      a = a + 5;
 
- //outputs 
+    studentGrades[i] = a;
+  }
+
+  // outputs
   for (int i = 0; i < 5; i++) {
   }
-  cout << "Test answers: " << endl;
+  cout << endl << "Test answers: 1 1 0 0 1" << endl;
   cout << setw(7) << " tst #|";
   cout << setw(7) << "|";
   cout << setw(7) << "|";
@@ -41,7 +55,9 @@ int main() {
 
   print2DMatrix(studentAnswer, 6, 6);
 
-  cout << "Grades in order from test 1-6: " << endl;
+  cout << endl << "Grades in order from test 1-6: " << endl;
+  for (int i = 0; i < 6; i++)
+    cout << studentGrades[i] << endl;
 
   return 0;
 }
