@@ -7,6 +7,7 @@ using namespace std;
 
 // Functions
 void printMatrix(int matrix[][2], int N_ROWS, int N_COLUMNS);
+void printMatrix_double(double matrix[][2], int N_ROWS, int N_COLUMNS);
 
 int main() {
 
@@ -28,7 +29,7 @@ int main() {
 
   determinant = ((a * d) - (b * c));
 
-  cout << a << b << c << d << endl;
+  //cout << a << b << c << d << endl;
 
   cout << "initial Matrix: " << endl;
   printMatrix(Matrix, 2, 2);
@@ -37,6 +38,8 @@ int main() {
     cout << "This Matrix has no inverse" << endl;
     return 0;
   }
+
+  cout << "determinant = " << determinant << endl;
 
   // Adjoint matrix
   cout << endl;
@@ -49,20 +52,30 @@ int main() {
   cout << "Adjoint Matrix: " << endl;
   printMatrix(Adjoint, 2, 2);
 
-  //calculate inverse
+  // calculate inverse
   cout << endl << "Inverse Matrix: " << endl;
-  
-  Adjoint[0][0] = Matrix[1][1];
-  Adjoint[0][1] = Matrix[0][1] * -1;
-  Adjoint[1][0] = Matrix[1][0] * -1;
-  Adjoint[1][1] = Matrix[0][0];
 
-  
+  for (int i = 0; i < 2; i++)
+    for (int a = 0; a < 2; a++)
+      Inverse[i][a] = (double)Adjoint[i][a] * (1 / (double)determinant);
+
+  printMatrix_double(Inverse, 2, 2);
+
   return 0;
 }
 
 // function to print the matrix in a matrix with 2 columns
 void printMatrix(int matrix[][2], int N_ROWS, int N_COLUMNS) {
+  int row, col;
+  for (row = 0; row < N_ROWS; row++) {
+    for (col = 0; col < N_COLUMNS; col++)
+      cout << setw(3) << matrix[row][col] << " ";
+
+    cout << endl;
+  }
+}
+
+void printMatrix_double(double matrix[][2], int N_ROWS, int N_COLUMNS) {
   int row, col;
   for (row = 0; row < N_ROWS; row++) {
     for (col = 0; col < N_COLUMNS; col++)
